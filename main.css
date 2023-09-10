@@ -1,12 +1,14 @@
 * {
     font-family: 'JetBrains Mono';
     box-sizing: border-box;
+    transition: 0.5s ease-in-out;
 }
 
 body {
-    background-color: #333;
+    background-color: maroon;
     margin: 0;
     padding: 0;
+    /* overflow: hidden; */
 }
 
 nav {
@@ -27,7 +29,6 @@ nav a {
     font-weight: bold;
 
     /* text-shadow: 2px 2px 6px rgba(200, 200, 200, 0.6); */
-    transition: 0.3s ease-in-out;
 }
 
 nav a:hover {
@@ -65,7 +66,13 @@ nav a:hover {
     box-sizing: border-box;
 
     /* transform-origin: bottom right; */
-    transition: 0.3s ease-in-out;
+}
+
+.disabled-button {
+    pointer-events: none;
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
 }
 
 .button:hover {
@@ -94,6 +101,49 @@ nav a:hover {
     border-radius: 100%;
 }
 
+#auth-container {
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    top: 150px;
+
+    width: 200px;
+
+    background-color: transparent;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+#auth-container.print {
+    transition: 0.4s ease-out;
+    top: 90vh;
+}
+
+.auth {
+    position: absolute;
+    height: 40px;
+    background-color: #0047AB;
+}
+
+.auth:hover {
+    background-color: #0818A8;
+}
+
+#signout {
+    transform: scale(0);
+    opacity: 0;
+}
+
+#signin.toggle {
+    transform: scale(0);
+    opacity: 0;
+}
+
+#signout.toggle {
+    transform: scale(1);
+    opacity: 1;
+}
+
 .refresh {
     position: absolute;
 
@@ -113,30 +163,44 @@ nav a:hover {
     background-color: #F5F5DC;
 }
 
-
 .button-container {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
 
+    background-color: #BBB;
+
     width: 10vw;
     margin: 0;
 
-    background-color: beige;
     border: none;
     border-radius: 12px;
     box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.25);
 
     overflow: hidden;
     opacity: 0;
+}
 
-    transition: 0.5s ease-in-out;
+.button-container:hover {
+    transform: scale(1.2);
+}
+
+.container-header {
+    width: 100%;
+    margin: 0;
+    padding: 8px;
+
+    text-align: center;
+
+    background-color: #333;
+    color: white;
 }
 
 .download {
     order: 1;
     transform-origin: top right;
+
     transform: translateX(25vw) translateY(-35vh) scale(0);
 }
 
@@ -150,17 +214,6 @@ nav a:hover {
 .upload.visible {
     opacity: 1;
     transform: translateX(0) translateY(0) scale(1);
-}
-
-.container-header {
-    width: 100%;
-    margin: 0;
-    padding: 8px;
-
-    text-align: center;
-
-    background-color: #111;
-    color: white;
 }
 
 #pdf-container {
@@ -177,13 +230,16 @@ nav a:hover {
 }
 
 #canvas-container {
-    /* flex to keep canvas centered */
+    z-index: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 
-    height: 80vh;
-    width: auto;
+    max-height: 80vh;
+    max-width: 80%;
+    margin: auto;
+    padding: 0 15px 15px 15px;
 
     /* background-color: black; */
 
@@ -193,12 +249,13 @@ nav a:hover {
 #pdf-canvas {
     height: calc(100% - 16px);
     max-width: 100%;
+    margin: 0 15px 15px 15px;
 
     transform: translateY(-110%);
 
     /* background-color: #777; */
-    box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.2);
-    transition: transform 0.5s ease-in-out;
+    box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.4);
+    border-radius: 0 0 20px 20px;
 }
 
 #pdf-canvas.print {
@@ -206,6 +263,8 @@ nav a:hover {
 }
 
 .fetch-link {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -234,10 +293,37 @@ nav a:hover {
     border: none;
     border-radius: 12px;
     box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.25);
-
-    transition: 0.3s ease-in-out;
 }
 
 #url:hover {
     box-shadow: 8px 8px 8px 4px rgba(0, 0, 0, 0.3);
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: au;
+    width: 50%;
+    height: 50%;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
 }

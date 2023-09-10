@@ -27,7 +27,13 @@
             <div id="canvas-container">
                 <canvas id="pdf-canvas"></canvas>
             </div>
+
             <button class="button refresh">&#x21BB;</button>
+        </div>
+
+        <div class="fetch-link" id="auth-container">
+            <button class="button auth" id="signin" onclick="handleAuthClick()">Sign In</button>
+            <button class="button auth" id="signout" onclick="handleSignoutClick()">Sign Out</button>
         </div>
 
         <div class="button-container download">
@@ -46,13 +52,24 @@
         </div>
     </div>
 
+    <button id="showPopupBtn">Show Popup</button>
+    <div class="popup" id="myPopup">
+        <div class="popup-content">
+            <span class="close" id="closePopupBtn">&times;</span>
+            <h2>This is a Popup</h2>
+            <p>Hello, I'm a simple popup!</p>
+        </div>
+    </div>
+
+    <a href="#"
+        onClick="MyWindow=window.open('http://www.google.com','MyWindow','width=600,height=300'); return false;">Click
+        Here</a>
+    <a href="javascript:window.open('http://www.google.com','mypopuptitle','width=600,height=400')">open popup</a>
 
 
-    <!-- <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
-    <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button> -->
 
-
-    <script src="main.js"></script>
+    <script src="script.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
     <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.js"></script>
