@@ -17,6 +17,9 @@
     </nav>
 
     <div id="main-page">
+
+        <div id="overlay"></div>
+
         <div id="pdf-container">
             <div class="fetch-link">
                 <input id="url" placeholder="Enter Link to Resume"
@@ -41,32 +44,18 @@
             <button class="button to-pdf">.pdf</button>
             <button class="button to-docx">.docx</button>
             <button class="button to-png">.png</button>
+            <button class="button to-all disabled-button">All</button>
         </div>
 
 
         <div class="button-container upload">
             <p class="container-header">Upload</p>
-            <button class="button to-pdf">LinkedIn</button>
-            <button class="button to-docx">Indeed</button>
-            <button class="button to-png">Simplify</button>
+            <button class="button linkedin">LinkedIn</button>
+            <button class="button indeed">Indeed</button>
+            <button class="button simplify">Simplify</button>
+            <button class="button all disabled-button">All</button>
         </div>
     </div>
-
-    <button id="showPopupBtn">Show Popup</button>
-    <div class="popup" id="myPopup">
-        <div class="popup-content">
-            <span class="close" id="closePopupBtn">&times;</span>
-            <h2>This is a Popup</h2>
-            <p>Hello, I'm a simple popup!</p>
-        </div>
-    </div>
-
-    <a href="#"
-        onClick="MyWindow=window.open('http://www.google.com','MyWindow','width=600,height=300'); return false;">Click
-        Here</a>
-    <a href="javascript:window.open('http://www.google.com','mypopuptitle','width=600,height=400')">open popup</a>
-
-
 
     <script src="script.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>

@@ -17,6 +17,10 @@ const buttonGetpdf = document.querySelector('.get-doc');
 const downloadPdf = document.querySelector('.to-pdf');
 const downloadDocx = document.querySelector('.to-docx');
 const downloadPng = document.querySelector('.to-png');
+const uploadLinkedIn = document.querySelector('.linkedin');
+const uploadIndeed = document.querySelector('.indeed');
+const uploadSimplify = document.querySelector('.simplify');
+const refreshButton = document.querySelector('.button.refresh');
 
 const authContainer = document.getElementById('auth-container');
 const canvasContainer = document.getElementById('canvas-container');
@@ -77,7 +81,6 @@ function handleAuthResult(authResult) {
     }
 }
 
-
 /**
  * Enables user interaction after all libraries are loaded.
  */
@@ -86,7 +89,6 @@ function maybeEnableButtons() {
         buttonSigin.style.visibility = 'visible';
     }
 }
-
 
 /**
  *  Sign in the user upon button click.
@@ -219,13 +221,35 @@ buttonGetpdf.addEventListener('click', () => {
     }
 });
 
-// Attach event listeners for download buttons
 downloadDocx.addEventListener('click', function () {
     downloadFile(docxUrl, '.docx');
 });
 
 downloadPdf.addEventListener('click', function () {
     downloadFile(pdfUrl, '.pdf');
+});
+
+downloadPng.addEventListener('click', () => {
+    var dataURL = canvas.toDataURL("image/png");
+    var a = document.createElement("a");
+    a.href = dataURL;
+    a.download = "Hardik_Resume.png";
+    a.click();
+});
+
+uploadLinkedIn.addEventListener('click', function () {
+    openWebsite('LinkedIn')
+});
+uploadIndeed.addEventListener('click', function () {
+    openWebsite('Indeed')
+});
+
+uploadSimplify.addEventListener('click', function () {
+    openWebsite('Simplify')
+});
+
+refreshButton.addEventListener('click', function () {
+    handleSignoutClick();
 });
 
 function downloadFile(downloadUrl, fileExt) {
@@ -263,6 +287,22 @@ function downloadFile(downloadUrl, fileExt) {
     }
 }
 
+function openWebsite(website) {
+    var url = {};
+
+    url["LinkedIn"] = "https://www.linkedin.com/jobs/application-settings";
+    url["Indeed"] = "https://profile.indeed.com/?hl=en_US&co=US&from=gnav-passport--passport-webapp";
+    url["Simplify"] = "https://simplify.jobs/profile/e3e281de-1d3d-4be2-bb75-36a770bca7ba";
+
+    var newWindow = window.open(url[website], '_blank', 'width=800,height=600');
+
+    if (newWindow) {
+        newWindow.focus();
+    } else {
+        alert('Unable to open the website. Please check your popup blocker settings.');
+    }
+}
+
 // Return screen to original state using animation
 function resetAnimations(signedin = false) {
     authContainer.classList.remove('print');
@@ -273,6 +313,8 @@ function resetAnimations(signedin = false) {
     }
     btnDonwloadContainer.classList.remove('visible');
     btnUploadContainer.classList.remove('visible');
+    canvasContainer.style.maxHeight = '0'
+    canvasContainer.classList.remove('zoom');
 }
 
 function animate() {
@@ -282,30 +324,17 @@ function animate() {
     buttonSignout.classList.add('toggle');
     btnDonwloadContainer.classList.add('visible');
     btnUploadContainer.classList.add('visible');
+    canvasContainer.style.maxHeight = '72vh';
 }
-
-// Use a refresh button to facilitate resetAnimation()
-const refreshButton = document.querySelector('.button.refresh');
-refreshButton.addEventListener('click', function () {
-    handleSignoutClick();
-});
-
 
 // Get references to the popup and buttons
 const popup = document.getElementById('myPopup');
 const showPopupBtn = document.getElementById('showPopupBtn');
 const closePopupBtn = document.getElementById('closePopupBtn');
 
-// Function to show the popup
-function showPopup() {
-    popup.style.display = 'block';
-}
+const overlay = document.getElementById('overlay');
 
-// Function to hide the popup
-function hidePopup() {
-    popup.style.display = 'none';
-}
-
-// Event listeners
-showPopupBtn.addEventListener('click', showPopup);
-closePopupBtn.addEventListener('click', hidePopup);
+canvasContainer.addEventListener('click', () => {
+    console.log('Click event triggered'); // Check if this message appears in the console
+    canvasContainer.classList.toggle('zoom');
+});
